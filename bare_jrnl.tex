@@ -1,0 +1,1071 @@
+
+%% bare_jrnl.tex
+%% V1.4b
+%% 2015/08/26
+%% by Michael Shell
+%% see http://www.michaelshell.org/
+%% for current contact information.
+%%
+%% This is a skeleton file demonstrating the use of IEEEtran.cls
+%% (requires IEEEtran.cls version 1.8b or later) with an IEEE
+%% journal paper.
+%%
+%% Support sites:
+%% http://www.michaelshell.org/tex/ieeetran/
+%% http://www.ctan.org/pkg/ieeetran
+%% and
+%% http://www.ieee.org/
+
+%%*************************************************************************
+%% Legal Notice:
+%% This code is offered as-is without any warranty either expressed or
+%% implied; without even the implied warranty of MERCHANTABILITY or
+%% FITNESS FOR A PARTICULAR PURPOSE! 
+%% User assumes all risk.
+%% In no event shall the IEEE or any contributor to this code be liable for
+%% any damages or losses, including, but not limited to, incidental,
+%% consequential, or any other damages, resulting from the use or misuse
+%% of any information contained here.
+%%
+%% All comments are the opinions of their respective authors and are not
+%% necessarily endorsed by the IEEE.
+%%
+%% This work is distributed under the LaTeX Project Public License (LPPL)
+%% ( http://www.latex-project.org/ ) version 1.3, and may be freely used,
+%% distributed and modified. A copy of the LPPL, version 1.3, is included
+%% in the base LaTeX documentation of all distributions of LaTeX released
+%% 2003/12/01 or later.
+%% Retain all contribution notices and credits.
+%% ** Modified files should be clearly indicated as such, including  **
+%% ** renaming them and changing author support contact information. **
+%%*************************************************************************
+
+
+% *** Authors should verify (and, if needed, correct) their LaTeX system  ***
+% *** with the testflow diagnostic prior to trusting their LaTeX platform ***
+% *** with production work. The IEEE's font choices and paper sizes can   ***
+% *** trigger bugs that do not appear when using other class files.       ***                          ***
+% The testflow support page is at:
+% http://www.michaelshell.org/tex/testflow/
+
+
+
+\documentclass[journal]{IEEEtran}
+
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage[linesnumbered,boxed]{algorithm2e}
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{multirow}
+\usepackage{colortbl}
+\usepackage{tikz}
+\usetikzlibrary{bayesnet}
+%
+% If IEEEtran.cls has not been installed into the LaTeX system files,
+% manually specify the path to it like:
+% \documentclass[journal]{../sty/IEEEtran}
+
+
+
+
+
+% Some very useful LaTeX packages include:
+% (uncomment the ones you want to load)
+
+
+% *** MISC UTILITY PACKAGES ***
+%
+%\usepackage{ifpdf}
+% Heiko Oberdiek's ifpdf.sty is very useful if you need conditional
+% compilation based on whether the output is pdf or dvi.
+% usage:
+% \ifpdf
+%   % pdf code
+% \else
+%   % dvi code
+% \fi
+% The latest version of ifpdf.sty can be obtained from:
+% http://www.ctan.org/pkg/ifpdf
+% Also, note that IEEEtran.cls V1.7 and later provides a builtin
+% \ifCLASSINFOpdf conditional that works the same way.
+% When switching from latex to pdflatex and vice-versa, the compiler may
+% have to be run twice to clear warning/error messages.
+
+
+
+
+
+
+% *** CITATION PACKAGES ***
+%
+%\usepackage{cite}
+% cite.sty was written by Donald Arseneau
+% V1.6 and later of IEEEtran pre-defines the format of the cite.sty package
+% \cite{} output to follow that of the IEEE. Loading the cite package will
+% result in citation numbers being automatically sorted and properly
+% "compressed/ranged". e.g., [1], [9], [2], [7], [5], [6] without using
+% cite.sty will become [1], [2], [5]--[7], [9] using cite.sty. cite.sty's
+% \cite will automatically add leading space, if needed. Use cite.sty's
+% noadjust option (cite.sty V3.8 and later) if you want to turn this off
+% such as if a citation ever needs to be enclosed in parenthesis.
+% cite.sty is already installed on most LaTeX systems. Be sure and use
+% version 5.0 (2009-03-20) and later if using hyperref.sty.
+% The latest version can be obtained at:
+% http://www.ctan.org/pkg/cite
+% The documentation is contained in the cite.sty file itself.
+
+
+
+
+
+
+% *** GRAPHICS RELATED PACKAGES ***
+%
+\ifCLASSINFOpdf
+  % \usepackage[pdftex]{graphicx}
+  % declare the path(s) where your graphic files are
+  % \graphicspath{{../pdf/}{../jpeg/}}
+  % and their extensions so you won't have to specify these with
+  % every instance of \includegraphics
+  % \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+\else
+  % or other class option (dvipsone, dvipdf, if not using dvips). graphicx
+  % will default to the driver specified in the system graphics.cfg if no
+  % driver is specified.
+  % \usepackage[dvips]{graphicx}
+  % declare the path(s) where your graphic files are
+  % \graphicspath{{../eps/}}
+  % and their extensions so you won't have to specify these with
+  % every instance of \includegraphics
+  % \DeclareGraphicsExtensions{.eps}
+\fi
+% graphicx was written by David Carlisle and Sebastian Rahtz. It is
+% required if you want graphics, photos, etc. graphicx.sty is already
+% installed on most LaTeX systems. The latest version and documentation
+% can be obtained at: 
+% http://www.ctan.org/pkg/graphicx
+% Another good source of documentation is "Using Imported Graphics in
+% LaTeX2e" by Keith Reckdahl which can be found at:
+% http://www.ctan.org/pkg/epslatex
+%
+% latex, and pdflatex in dvi mode, support graphics in encapsulated
+% postscript (.eps) format. pdflatex in pdf mode supports graphics
+% in .pdf, .jpeg, .png and .mps (metapost) formats. Users should ensure
+% that all non-photo figures use a vector format (.eps, .pdf, .mps) and
+% not a bitmapped formats (.jpeg, .png). The IEEE frowns on bitmapped formats
+% which can result in "jaggedy"/blurry rendering of lines and letters as
+% well as large increases in file sizes.
+%
+% You can find documentation about the pdfTeX application at:
+% http://www.tug.org/applications/pdftex
+
+
+
+
+
+% *** MATH PACKAGES ***
+%
+%\usepackage{amsmath}
+% A popular package from the American Mathematical Society that provides
+% many useful and powerful commands for dealing with mathematics.
+%
+% Note that the amsmath package sets \interdisplaylinepenalty to 10000
+% thus preventing page breaks from occurring within multiline equations. Use:
+%\interdisplaylinepenalty=2500
+% after loading amsmath to restore such page breaks as IEEEtran.cls normally
+% does. amsmath.sty is already installed on most LaTeX systems. The latest
+% version and documentation can be obtained at:
+% http://www.ctan.org/pkg/amsmath
+
+
+
+
+
+% *** SPECIALIZED LIST PACKAGES ***
+%
+%\usepackage{algorithmic}
+% algorithmic.sty was written by Peter Williams and Rogerio Brito.
+% This package provides an algorithmic environment fo describing algorithms.
+% You can use the algorithmic environment in-text or within a figure
+% environment to provide for a floating algorithm. Do NOT use the algorithm
+% floating environment provided by algorithm.sty (by the same authors) or
+% algorithm2e.sty (by Christophe Fiorio) as the IEEE does not use dedicated
+% algorithm float types and packages that provide these will not provide
+% correct IEEE style captions. The latest version and documentation of
+% algorithmic.sty can be obtained at:
+% http://www.ctan.org/pkg/algorithms
+% Also of interest may be the (relatively newer and more customizable)
+% algorithmicx.sty package by Szasz Janos:
+% http://www.ctan.org/pkg/algorithmicx
+
+
+
+
+% *** ALIGNMENT PACKAGES ***
+%
+%\usepackage{array}
+% Frank Mittelbach's and David Carlisle's array.sty patches and improves
+% the standard LaTeX2e array and tabular environments to provide better
+% appearance and additional user controls. As the default LaTeX2e table
+% generation code is lacking to the point of almost being broken with
+% respect to the quality of the end results, all users are strongly
+% advised to use an enhanced (at the very least that provided by array.sty)
+% set of table tools. array.sty is already installed on most systems. The
+% latest version and documentation can be obtained at:
+% http://www.ctan.org/pkg/array
+
+
+% IEEEtran contains the IEEEeqnarray family of commands that can be used to
+% generate multiline equations as well as matrices, tables, etc., of high
+% quality.
+
+
+
+
+% *** SUBFIGURE PACKAGES ***
+%\ifCLASSOPTIONcompsoc
+%  \usepackage[caption=false,font=normalsize,labelfont=sf,textfont=sf]{subfig}
+%\else
+%  \usepackage[caption=false,font=footnotesize]{subfig}
+%\fi
+% subfig.sty, written by Steven Douglas Cochran, is the modern replacement
+% for subfigure.sty, the latter of which is no longer maintained and is
+% incompatible with some LaTeX packages including fixltx2e. However,
+% subfig.sty requires and automatically loads Axel Sommerfeldt's caption.sty
+% which will override IEEEtran.cls' handling of captions and this will result
+% in non-IEEE style figure/table captions. To prevent this problem, be sure
+% and invoke subfig.sty's "caption=false" package option (available since
+% subfig.sty version 1.3, 2005/06/28) as this is will preserve IEEEtran.cls
+% handling of captions.
+% Note that the Computer Society format requires a larger sans serif font
+% than the serif footnote size font used in traditional IEEE formatting
+% and thus the need to invoke different subfig.sty package options depending
+% on whether compsoc mode has been enabled.
+%
+% The latest version and documentation of subfig.sty can be obtained at:
+% http://www.ctan.org/pkg/subfig
+
+
+
+
+% *** FLOAT PACKAGES ***
+%
+%\usepackage{fixltx2e}
+% fixltx2e, the successor to the earlier fix2col.sty, was written by
+% Frank Mittelbach and David Carlisle. This package corrects a few problems
+% in the LaTeX2e kernel, the most notable of which is that in current
+% LaTeX2e releases, the ordering of single and double column floats is not
+% guaranteed to be preserved. Thus, an unpatched LaTeX2e can allow a
+% single column figure to be placed prior to an earlier double column
+% figure.
+% Be aware that LaTeX2e kernels dated 2015 and later have fixltx2e.sty's
+% corrections already built into the system in which case a warning will
+% be issued if an attempt is made to load fixltx2e.sty as it is no longer
+% needed.
+% The latest version and documentation can be found at:
+% http://www.ctan.org/pkg/fixltx2e
+
+
+%\usepackage{stfloats}
+% stfloats.sty was written by Sigitas Tolusis. This package gives LaTeX2e
+% the ability to do double column floats at the bottom of the page as well
+% as the top. (e.g., "\begin{figure*}[!b]" is not normally possible in
+% LaTeX2e). It also provides a command:
+%\fnbelowfloat
+% to enable the placement of footnotes below bottom floats (the standard
+% LaTeX2e kernel puts them above bottom floats). This is an invasive package
+% which rewrites many portions of the LaTeX2e float routines. It may not work
+% with other packages that modify the LaTeX2e float routines. The latest
+% version and documentation can be obtained at:
+% http://www.ctan.org/pkg/stfloats
+% Do not use the stfloats baselinefloat ability as the IEEE does not allow
+% \baselineskip to stretch. Authors submitting work to the IEEE should note
+% that the IEEE rarely uses double column equations and that authors should try
+% to avoid such use. Do not be tempted to use the cuted.sty or midfloat.sty
+% packages (also by Sigitas Tolusis) as the IEEE does not format its papers in
+% such ways.
+% Do not attempt to use stfloats with fixltx2e as they are incompatible.
+% Instead, use Morten Hogholm'a dblfloatfix which combines the features
+% of both fixltx2e and stfloats:
+%
+% \usepackage{dblfloatfix}
+% The latest version can be found at:
+% http://www.ctan.org/pkg/dblfloatfix
+
+
+
+
+%\ifCLASSOPTIONcaptionsoff
+%  \usepackage[nomarkers]{endfloat}
+% \let\MYoriglatexcaption\caption
+% \renewcommand{\caption}[2][\relax]{\MYoriglatexcaption[#2]{#2}}
+%\fi
+% endfloat.sty was written by James Darrell McCauley, Jeff Goldberg and 
+% Axel Sommerfeldt. This package may be useful when used in conjunction with 
+% IEEEtran.cls'  captionsoff option. Some IEEE journals/societies require that
+% submissions have lists of figures/tables at the end of the paper and that
+% figures/tables without any captions are placed on a page by themselves at
+% the end of the document. If needed, the draftcls IEEEtran class option or
+% \CLASSINPUTbaselinestretch interface can be used to increase the line
+% spacing as well. Be sure and use the nomarkers option of endfloat to
+% prevent endfloat from "marking" where the figures would have been placed
+% in the text. The two hack lines of code above are a slight modification of
+% that suggested by in the endfloat docs (section 8.4.1) to ensure that
+% the full captions always appear in the list of figures/tables - even if
+% the user used the short optional argument of \caption[]{}.
+% IEEE papers do not typically make use of \caption[]'s optional argument,
+% so this should not be an issue. A similar trick can be used to disable
+% captions of packages such as subfig.sty that lack options to turn off
+% the subcaptions:
+% For subfig.sty:
+% \let\MYorigsubfloat\subfloat
+% \renewcommand{\subfloat}[2][\relax]{\MYorigsubfloat[]{#2}}
+% However, the above trick will not work if both optional arguments of
+% the \subfloat command are used. Furthermore, there needs to be a
+% description of each subfigure *somewhere* and endfloat does not add
+% subfigure captions to its list of figures. Thus, the best approach is to
+% avoid the use of subfigure captions (many IEEE journals avoid them anyway)
+% and instead reference/explain all the subfigures within the main caption.
+% The latest version of endfloat.sty and its documentation can obtained at:
+% http://www.ctan.org/pkg/endfloat
+%
+% The IEEEtran \ifCLASSOPTIONcaptionsoff conditional can also be used
+% later in the document, say, to conditionally put the References on a 
+% page by themselves.
+
+
+
+
+% *** PDF, URL AND HYPERLINK PACKAGES ***
+%
+%\usepackage{url}
+% url.sty was written by Donald Arseneau. It provides better support for
+% handling and breaking URLs. url.sty is already installed on most LaTeX
+% systems. The latest version and documentation can be obtained at:
+% http://www.ctan.org/pkg/url
+% Basically, \url{my_url_here}.
+
+
+
+
+% *** Do not adjust lengths that control margins, column widths, etc. ***
+% *** Do not use packages that alter fonts (such as pslatex).         ***
+% There should be no need to do such things with IEEEtran.cls V1.6 and later.
+% (Unless specifically asked to do so by the journal or conference you plan
+% to submit to, of course. )
+
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+
+\begin{document}
+%
+% paper title
+% Titles are generally capitalized except for words such as a, an, and, as,
+% at, but, by, for, in, nor, of, on, or, the, to and up, which are usually
+% not capitalized unless they are the first or last word of the title.
+% Linebreaks \\ can be used within to get better formatting as desired.
+% Do not put math or special symbols in the title.
+\title{Drug Target Interaction Prediction with Non-random Missing Labels}
+%
+%
+% author names and IEEE memberships
+% note positions of commas and nonbreaking spaces ( ~ ) LaTeX will not break
+% a structure at a ~ so this keeps an author's name from being broken across
+% two lines.
+% use \thanks{} to gain access to the first footnote area
+% a separate \thanks must be used for each paragraph as LaTeX2e's \thanks
+% was not built to handle multiple paragraphs
+%
+
+%\author{Michael~Shell,~\IEEEmembership{Member,~IEEE,}
+%        John~Doe,~\IEEEmembership{Fellow,~OSA,}
+%        and~Jane~Doe,~\IEEEmembership{Life~Fellow,~IEEE}% <-this % stops a space
+%\thanks{M. Shell was with the Department
+%of Electrical and Computer Engineering, Georgia Institute of Technology, Atlanta,
+%GA, 30332 USA e-mail: (see http://www.michaelshell.org/contact.html).}% <-this % stops a space
+%\thanks{J. Doe and J. Doe are with Anonymous University.}% <-this % stops a space
+%\thanks{Manuscript received April 19, 2005; revised August 26, 2015.}
+%}
+\author{\IEEEauthorblockN{Sheng Ni, Chen Lin, Xiangxiang Zeng} \\
+\IEEEauthorblockA{\textit{Department of Computer Science,}
+\textit{Xiamen University,}
+Xiamen, China}\\
+\and
+\IEEEauthorblockN{Yun Liang} \\
+\IEEEauthorblockA{\textit{Department of Information} 
+\textit{,South China Agricultural University}
+,Guangzhou, China}
+\thanks{e-mail: chenlin@xmu.edu.cn }% <-this % stops a space
+}
+
+
+% note the % following the last \IEEEmembership and also \thanks - 
+% these prevent an unwanted space from occurring between the last author name
+% and the end of the author line. i.e., if you had this:
+% 
+% \author{....lastname \thanks{...} \thanks{...} }
+%                     ^------------^------------^----Do not want these spaces!
+%
+% a space would be appended to the last name and could cause every name on that
+% line to be shifted left slightly. This is one of those "LaTeX things". For
+% instance, "\textbf{A} \textbf{B}" will typeset as "A B" not "AB". To get
+% "AB" then you have to do: "\textbf{A}\textbf{B}"
+% \thanks is no different in this regard, so shield the last } of each \thanks
+% that ends a line with a % and do not let a space in before the next \thanks.
+% Spaces after \IEEEmembership other than the last one are OK (and needed) as
+% you are supposed to have spaces between the names. For what it is worth,
+% this is a minor point as most people would not even notice if the said evil
+% space somehow managed to creep in.
+
+
+
+% The paper headers
+\markboth{Journal of \LaTeX\ Class Files,~Vol.~14, No.~8, August~2015}%
+{Shell \MakeLowercase{\textit{et al.}}: Bare Demo of IEEEtran.cls for IEEE Journals}
+% The only time the second header will appear is for the odd numbered pages
+% after the title page when using the twoside option.
+% 
+% *** Note that you probably will NOT want to include the author's ***
+% *** name in the headers of peer review papers.                   ***
+% You can use \ifCLASSOPTIONpeerreview for conditional compilation here if
+% you desire.
+
+
+
+
+% If you want to put a publisher's ID mark on the page you can do it like
+% this:
+%\IEEEpubid{0000--0000/00\$00.00~\copyright~2015 IEEE}
+% Remember, if you use this you must call \IEEEpubidadjcol in the second
+% column for its text to clear the IEEEpubid mark.
+
+
+
+% use for special paper notices
+%\IEEEspecialpapernotice{(Invited Paper)}
+
+
+
+
+% make the title area
+\maketitle
+
+% As a general rule, do not put math, special symbols or citations
+% in the abstract or keywords.
+\begin{abstract}
+\textbf{D}rug-\textbf{T}arget \textbf{I}nteraction (DTI) prediction is a very important direction in bioinformatics and can be used for the development of new drugs. At the same time, for existing drugs, the use of DTI prediction methods can find new targets, greatly shortening the development cycle of new drugs, and has become an important method for drug development. In our research, we assume the unknown DTIs are labels that are missing not at random. This assumption is different from the previous papers in which the unknown label samples is treated as a negative sample. For example, negative DTI labels are more likely to be missing because biomedical researchers prioritize to study DTIs that are more likely to be positive. We introduce a novel probabilistic model, \textbf{F}actorization with \textbf{N}on-random \textbf{M}issing \textbf{L}abels (FNML), for DTI prediction.  FNML models the generative process for the DTI labels (i.e. the labels are positive or negative) and responses (i.e. the labels are observed or missing). In particular, the probability of observing or missing a label is associated with the sign of the label. In order to further reduce prediction variance and improve prediction accuracy on highly imbalanced DTI dataset, we present FNML-EN, an ensemble scheme which is designed specifically for FNML model. Experimental results on the latest DTI database show that FNML-EN outperforms state-of-the-art methods. We also conduct comprehensive experiments to validate the robust performance of the proposed models.
+\end{abstract}
+
+% Note that keywords are not normally used for peerreview papers.
+\begin{IEEEkeywords}
+Missing Not At Random, Drug Target Interaction Prediction, Probabilistic Factor Models\end{IEEEkeywords}
+
+
+
+
+
+
+% For peer review papers, you can put extra information on the cover
+% page as needed:
+% \ifCLASSOPTIONpeerreview
+% \begin{center} \bfseries EDICS Category: 3-BBND \end{center}
+% \fi
+%
+% For peerreview papers, this IEEEtran command inserts a page break and
+% creates the second title. It will be ignored for other modes.
+\IEEEpeerreviewmaketitle
+
+
+
+\section{Introduction}
+% The very first letter is a 2 line initial drop letter followed
+% by the rest of the first word in caps.
+% 
+% form to use if the first word consists of a single letter:
+% \IEEEPARstart{A}{demo} file is ....
+% 
+% form to use if you need the single drop letter followed by
+% normal text (unknown if ever used by the IEEE):
+% \IEEEPARstart{A}{}demo file is ....
+% 
+% Some journals put the first two words in caps:
+% \IEEEPARstart{T}{his demo} file is ....
+% 
+% Here we have the typical use of a "T" for an initial drop letter
+% and "HIS" in caps to complete the first word.
+\IEEEPARstart{F}{rom} discovery to promotion to the market, a drug usually costs hundreds of millions of dollars a few years. Target identification and verification is the first step in the new drug development process. How to quickly and effectively identify a drug target has become a research hotspot in academia and industry.
+
+%\textbf{D}rug-\textbf{T}arget \textbf{I}nteraction (DTI) is fundamental to drug discovery and design. 
+As biochemical experimental methods for DTI identification are extremely costly and time-consuming, computational DTI prediction methods have received a growing popularity in literature. Traditional computational methods to predict DTIs mainly include ligand-based methods~\cite{Keiser2007ligand} and molecule docking methods~\cite{Cheng2007docking}. Ligand-based methods are ineffective when target proteins have little binding ligands , while molecular docking methods are computationally costly and fail to offer accurate predictions when 3D structures of target proteins are not available~\cite{Chen2016docking}. To overcome these problems, many machine learning-based methods have been proposed for inferring DTI. The majority of existing machine learning-based methods treat DTI prediction as a binary classification task, where known DTIs are labeled as positive and unknown DTIs are labeled as negative~\cite{Ding2013Similarity}. The researchers extracted features from drug and target, then training models such as SVM, Logistic Regression, etc. to establish a classifier.
+
+However, due to the particularity of drug target data, it is difficult for traditional classifiers to obtain a better effect. First, there are a large number of unknown DTIs in the drug target data. Most of the papers consider the samples of these unknown DTIs to be negative samples. Obviously, this is unreasonable because there are a large number of positive samples among the samples of these unknown DTIs. 
+%Second, because there are few researchers who will study whether drugs and targets are not working, negative samples are missing from drug target data. The general classifier needs to provide negative samples for training, and the lack of negative samples will undoubtedly seriously affect the effect of the classifier. 
+Second, there is very little positive sample data in the data. For example, In the data used in this paper, the proportion of positive samples is less than 1\%. In such highly unbalanced data, most of the classifiers will fail. To address the imbalanced problem arised from the binary classification scheme, many research has attempted to extract a subset of reliable negative samples, e.g. by random sampling~\cite{Luo2017Network} or by \textbf{P}ositive \textbf{U}nlabel \textbf{L}earning (PU Learning)~\cite{Peng2017Screening}.
+
+
+Instead of labeling the unknown DTIs as negative, we argue that it is more natural to consider the unknown DTIs, i.e. DTIs that are neither identified in vivo to be positive nor experimentally validated to be negative (non-interacting drug-target pairs), as missing labels. Furthermore, our assumption in this work is that labels are not missing at random. This is an intuitive and reasonable assumption, because researchers will use their domain expertise to filter DTIs with a high possibility to be positive and prioritize validations for these DTIs in vivo. For example, researchers find the efficacy target of a drug based on principles of biochemistry, biophysics, genetics and chemical biology. If ample evidences exist to support positive interactions with the target, then the possibility of a positive DTI is high, and the researchers are likely to conduct in vivo experiments. On the contrary, drug target interactions that are less likely to be positive are more likely to be ignored by researchers and their labels are likely to be missing.
+
+\subsection{Related Work}
+Many traditional machine learning methods simply build the classifier through the chemical structure of the drug and the sequence of the protein. As people's research on drugs and diseases continues to deepen, other information can be combined in the process of predicting drug targets, such as drugs and side effects, drugs and diseases, targets and diseases. For instance, DTINet~\cite{Luo2017Network} combines drugs, diseases, side effects and other information to learn low-dimensional feature representations of drug and targets and then applies inductive matrix completion. HNM~\cite{Wang2014Drug} integrates information through drug, target and disease to construct a three-layer heterogeneous network. After that, the strength of each drug-target pair is calculated by an iterative algorithm. 
+
+One component of our work (i.e labels are generated by feature vectors learnt and fused from heterogenous information networks) is inspired by a recent work DTINet~\cite{Luo2017Network}. However, there are three key differences between our work and DTINet. (1) DTINet is based on deterministic matrix factorization, our work is based on probabilistic factor models. For example, the hidden feature space mapping matrix, labels, and responses are all random variables. This setting enables the FNML model to regulate the parameters (i.e. hidden feature space mapping matrix) by introducing appropriate priors. Therefore, performance on sparse dataset is improved. (2) DTINet is based on randomly missing responses, i.e. it samples uniformly a set of unknown DTIs as negative sample, while FNML is based on missing not at random theories. Statistical theory in~\cite{Little1987Statistical} shows that applying a model based on missing at random assumptions can lead to biased parameter estimation on data sets with missing not at random entries. (3) DTINet adopts only a subset of unknown DTIs to preserve a balanced number of positive and negative samples, while our model uses all information in the data set.
+
+We also want to distinguish our work with another line of research. Usually only positive DTIs are deposited in known databases. Due to the lack of negative samples, PU learning has been employed in DTI identification, e.g. to facilitate negative sample extraction~\cite{Peng2017Screening}. PU learning does not explicitly associate the status of an instance (i.e. being labeled or unlabeled) with the value of its label. We also want to mention here that, although we experiment with datasets where only positive DTIs are deposited, FNML is extendable without difficulty to databases where positive and negative DTIs are available. Thus our model is applicable in more scenarios.
+
+\subsection{Contribution}
+
+Our first contribution in this work is a novel \textbf{F}actorization with \textbf{N}on-random \textbf{M}issing \textbf{L}abels model (FNML). To the best of our knowledge, this is the first time missing not at random theory is applied in DTI identification. The inputs of FNML are feature vectors of drugs and targets, the partially observed labels, and the fully observed responses (i.e. labels are given or missing). We allow the feature vectors to be learnt and/or integrated from heterogenous sources. The labels and responses are binary variables. The FNML model mimics the probabilistic procedures to generate labels from feature vectors and responses from labels. Specifically, the labels are related to feature vectors of both drugs and targets, and a hidden matrix mapping from the drug features to target features. The possibility of giving a response is associated with the sign of the label.
+
+Our second contribution is FNML-EN, an ensemble learning strategy which is specifically designed for FNML. FNML-EN is efficient as it leverages the power of over-sampling in the iterative boosting framework~\cite{Boosting}. We use both predictions of label and response by the current FNML model to sample training instances to train the next FNML model.  FNML models based on different training sets are aggregated to provide the final prediction.
+
+We conduct comprehensive experiments on the latest DTI database. Experimental results show that the FNML model outperforms state-of-the-art DTI prediction methods in terms of \textbf{A}rea \textbf{U}nder \textbf{R}eceiver \textbf{O}perating \textbf{C}haracteristic curve (AUROC) and \textbf{A}rea \textbf{U}nder \textbf{P}recision \textbf{R}ecall curve (AUPR), which are the most commonly adopted metrics to evaluate DTI prediction performance. FNML-EN further improves prediction accuracy. We also show that our models provide robust performance enhancement, despite of the input features.
+
+\section{The Proposed Method}\label{sec:method}
+We start with the problem definitions and notations in Sec.~\ref{sec:input}. We then describe the proposed model FNML in Sec.~\ref{sec:model}. Finally we present the inference algorithm in Sec.~\ref{sec:inference}.
+
+\subsection{Preliminaries}\label{sec:input}
+DTI identification is often modeled as a binary classification task. Formally, we are given $P\in \mathcal{R}^{N\times M}$ a set of DTI labels, where $p_{i,j}=0$ indicates a negative interaction between drug $i$ and target $j$, $p_{i,j}=1$ indicates a positive DTI, the feature vectors on drug side $X\in \mathcal{R}^{N \times K}$, where $x_{i,k}$ represents drug $i$'s weight on drug feature $k$, the feature vectors on target side $Y\in \mathcal{R}^{M \times L}$, where $y_{j,l}$ represents target $j$'s weight on target feature $l$. The problem is to predict for a new drug-target pair $<i',j'>$, the possibility of a positive DTI $p(p_{i',j'}=1)$.
+
+%unclear
+Similar to DTINet~\cite{Luo2017Network}, we use a compact feature expression learnt from drug and protein networks. To extracting features $X,Y$, we first create networks that involve drugs (for $X$) and proteins (for $Y$). We compute similarity score between each pair of nodes in the networks. Then, the diffusion component analysis (DCA)~\cite{Cho2015DCA} is applied to learn a low-dimensional vector representation of each node of the drug network and protein network. Note here that $X,Y$ can be extracted from a single network or an aggregation of several networks. The details of feature extraction are described in Sec.~\ref{sec:experiment}.
+
+In addition to the features $X,Y$ and labels $P$, we make one essential modification to the problem definition. We assume that the inputs also contain responses $R\in \mathcal{R}^{N\times M}$, where $R_{i,j}=0$ indicates an unknown DTI, $R_{i,j}=1$ indicates a verified DTI (positive or negative). For positive responses $R_{i,j}=1$, the labels $P_{i,j}$ are observed. For negative responses $R_{i,j}=0$, the labels are hidden and unknown.
+
+\subsection{FNML Model}\label{sec:model}
+
+We use a factor model, depicted in Fig.~\ref{fig:model}. The features $X,Y$ are in different dimensions. To associate the drug features with the target features, we introduce a hidden matrix $Z\in\mathcal{R}^{K\times L}$, where $Z_{k,l}$ is a projection that maps the drug feature $k$ to the target feature $l$. We assume that $Z$ is sampled from a Gaussian distribution,
+
+\begin{equation}\label{equ:z}
+\forall k,l, Z_{k,l}\sim \mathcal{N}(0,\sigma^2),
+\end{equation}
+where $\sigma^2$ is the variance. We use zero mean to favor sparse feature mapping, i.e. a drug feature $k$ is associated with a few target features.
+
+\begin{figure}
+  \centering
+\scalebox{0.8}{
+  \tikz[yscale=0.5]{ %
+%hyper parameters
+  %latent nodes
+    \node[const] (x) {$X$} ; %
+    \node[const, right =of x] (y) {$Y$};
+     \node[const, right =of y] (sigma) {$\sigma^2$};
+    \node[latent, below = of sigma] (z) {$Z$};
+           %per interaction
+    \node[obs, below=2 of z](p){$P$};
+      \node[obs, below= of p] (r){$R$};
+  \node[latent, right = 2 of r] (beta){$\beta$};
+  \node[const,right = of beta](eta) {$\eta$};
+    \edge{x}{p};
+    \edge{sigma}{z};
+    \edge{y}{p};
+    \edge{z}{p};
+    \edge{p}{r};
+  \edge{beta}{r};
+  \edge{eta}{beta};
+     \plate[inner sep=0.2cm, xshift=-0.12cm, yshift=0.12 cm] {plate} {(p) (r)} {N};
+   \plate[inner sep=0.2cm, xshift=-0.12cm, yshift=0.12 cm] {plate2} {(beta)} {2};
+ }}
+%\vspace*{-5pt}
+
+\caption{Graphical Representation of the FNML model}\label{fig:model}
+
+\end{figure}
+
+We then assume that the binary label $P_{i,j}$ is generated from the following process:
+\begin{equation}\label{equ:p}
+\forall i,j, p(P_{i,j}=1|X,Y,Z)=\frac{1}{1+\exp{(-XZY)}_{i,j}}.
+\end{equation}
+The binary response is sampled from a Bernoulli distribution. The parameters of the Bernoulli distribution are related to the value of each $P_{i,j}$. Therefore we define $\beta_p\in\mathcal{R}^{2},p\in \{0,1\}$, $\forall p, \beta_{p,0}>0,\beta_{p,1}>0,\beta_{p,0}+\beta_{p,1}=1$, we have:
+\begin{eqnarray}\label{equ:q}
+\forall p\in \{0,1\}, \beta_p \sim Beta(\eta),\\
+\forall i,j, R_{i,j} \sim Bern (\beta_{P_{i,j},1}),
+\end{eqnarray}
+where $\eta\in\mathcal{R}^{2}$ is the hyperparameter for the Beta distribution.
+
+\subsection{Inference}\label{sec:inference}
+The objective is to maximize the likelihood which consists of two terms. The first term is on partial observations, i.e. $R_{i,j}=0$ and $P_{i,j}$ unknown. The second term is on full observations, i.e. $R_{i,j}=1$ and known $P_{i,j}$.
+
+\begin{eqnarray}\label{equ:loss}
+\mathcal{L}&=&\sum_{R_{i,j}=0} \log p(R_{i,j}|X,Y,\sigma^2,\eta) \nonumber\\
+&+& \sum_{R_{i,j}=1} \log p(R_{i,j},P_{i,j}|X,Y,\sigma^2,\eta)
+\end{eqnarray}
+
+Direct optimization for both terms in Equ.~\ref{equ:loss} is intractable, as they involve integration over continuous hidden variables. For example, $p(R|X,Y,\sigma^2,\eta)=\int_{P,Z,\beta} p(R|P,\beta,\eta) p(P|X,Y,Z) p(Z|\sigma^2) p(\beta|\eta) $. We employ variational inference~\cite{Variational} to infer the parameters. That is, we use the mean field assumption to factorize the posterior distribution: 
+\begin{equation}
+    q(Z,\beta,P|R,X,Y,\sigma^{2},\eta) = q(P|\theta)q(Z|\mu,\upsilon)q(\beta|\rho),
+\end{equation}
+It is convenient if $q(P|\theta),q(Z|\mu,\upsilon),q(\beta|\rho)$ are exponential distributions. We approximate the sigmoid function in Equ.~\ref{equ:p} by an exponential distribution. We use the property that any sigmoid function $\sigma(\cdot)$ has a lower bound:
+\begin{equation}
+q(P|\theta)=\sigma(\theta)\geq \sigma(\zeta)\exp{((\theta-\zeta)/2-\lambda(\zeta)(\theta^2-\zeta^2))},
+\end{equation}
+where $\lambda(\zeta)=[\sigma(\zeta)-1/2]/[2\zeta]$.
+Maximize the likelihood is equal to maximize ELBO(Evidence Lower BOund):
+\begin{eqnarray}\label{elbo}
+    %L(q) = \sum_{(i,j)\in s1}(E_{q(Z,\beta)}[\ln p(R_{i,j},P_{i,j},Z,\beta)] -E_{q(Z,\beta)}[\ln q(Z,\beta)]) + \nonumber \\  \sum_{(i,j)\in s2}(E_{q(Z,\beta ,P_{i,j})}[\ln P(R_{i,j},P_{i,j},Z,\beta)] -E_{q(Z,\beta,P_{i,j})}[\ln q(Z,\beta,P_{i,j})])
+    \mathcal{L}(q(Z,\beta ,P)) &=& E_{q(Z,\beta ,P)}[\ln P(R,P,Z,\beta)] \nonumber \\ &-&E_{q(Z,\beta,P)}[\ln q(Z,\beta,P)]
+\end{eqnarray}
+We divide the data objects into two disjoint sets, $s_1 = \{(i,j)\in \mathcal{R}^{N\times M}|R_{i,j}=1\}$, and $s_2= \{(i,j)\in \mathcal{R}^{N\times M}|R_{i,j}=0\}$.
+First we derive the parameters of $\ln{q(Z_{k,l}|\mu_{k,l},\upsilon_{k,l})}$:
+\begin{eqnarray*}
+    \ln q(Z_{k,l}|\mu_{k,l},\upsilon_{k,l}) 
+    &=& \sum_{(i,j)\in s_1}E_{q(\beta)}[\ln p(R_{i,j},P_{i,j},Z,\beta)]  \\
+    &+& \sum_{(i,j)\in s_2}E_{q(\beta,P_{i,j})}[\ln p(R_{i,j},P_{i,j},Z,\beta) \\
+    &+& const
+\end{eqnarray*}
+Where $const$ represents the irrelevant item.
+%\begin{eqnarray*}
+%    E_{q(\beta,P)}[\ln p(R,P,Z,\beta)]&=& XZY^{T}*\theta %-\frac{XZY^{T}}{2} \nonumber \\
+%    &-&\lambda(\xi)(XZY^{T})^2-\frac{Z^2}{2\sigma^2}+const
+%\end{eqnarray*}
+%\begin{eqnarray*}
+%E_{q(\beta)}[\ln p(R,P,Z,\beta)] &=& XZY^{T} - %\frac{XZY^{T}}{2}\\
+% &-&\lambda(\xi)(XZY^{T})^2 -\frac{Z^2}{2\sigma^2}+const
+%\end{eqnarray*}
+Removing irrelevant items and get:
+\begin{eqnarray*}
+    \ln q(Z_{k,l}|\mu_{k,l},\upsilon_{k,l})&=&[\sum_{(i,j)\in s_2}[(\theta_{i,j}-\frac{1}{2})X_{i,k}*(Y^{T})_{l,j}]\\
+    &+& \sum_{(i,j)\in s_1}\frac{1}{2}X_{i,k}*(Y^{T})_{l,j}]Z_{k,l}\\
+    &-&(\sum_{i,j}\lambda(\zeta_{ij})*X^{2}_{i,k}*{(Y^{T})_{l,j}}^{2} \\
+    &+&\frac{1}{\sigma^{2}})*Z^{2}_{k,l}
+\end{eqnarray*}
+Since $Z_{k,l}$ obeys a Gaussian distribution, the expectation and variance of the Gaussian distribution can be obtained:
+\begin{eqnarray*}
+\mu_{k,l} = \frac{\sum_{(i,j)\in s_2}(\theta_{i,j}-\frac{1}{2})X_{i,k}*Y_{j,l}+\sum_{(i,j)\in s_1}\frac{1}{2}X_{i,k}*Y_{j,l}}{2*(\sum_{i,j}\lambda(\zeta_{i,j})X^{2}_{i,k}Y_{j,l}^{2}+\frac{1}{\sigma^2})}
+\end{eqnarray*}
+\begin{eqnarray*}
+\upsilon_{k,l} = \frac{1}{\sqrt{2*(\sum_{i,j}\lambda(\zeta_{i,j})X^{2}_{i,k}Y_{j,l}^{2}+\frac{1}{\sigma^2})}}
+\end{eqnarray*}
+Next, we derive $\ln(\beta|\rho)$:
+\begin{eqnarray*}
+    \ln q(\beta|\rho) 
+    &=& \sum_{(i,j)\in s_1}E_{q(Z)}{\ln p(R_{i,j},P_{i,j},Z,\beta)}  \nonumber \\ 
+    &+& \sum_{(i,j)\in s_2}E_{q(Z,P_{i,j})}{\ln p(R_{i,j},P_{i,j},Z,\beta)} + const
+\end{eqnarray*}
+Expanding the two items $\sum_{(i,j)\in s_1}E_{q(Z)}{\ln p(R_{i,j},P_{i,j},Z,\beta)}$ and $\sum_{(i,j)\in s_2}E_{q(Z,P_{i,j})}{\ln p(R_{i,j},P_{i,j},Z,\beta)}$, then remove irrelevant items: 
+\begin{eqnarray*}
+    \ln q(\beta|\rho) &=& (\sum_{(i,j)\in s_2}\theta _{i,j}R_{i,j} + \sum_{(i,j)\in s_1}P_{i,j}R_{i,j} \\
+    &+&\eta_{10}-1)\ln{\beta_{1}}+[\sum_{(i,j)\in s_2}\theta_{i,j} (1-R_{i,j}) \\
+    &+& \sum_{(i,j)\in s_1}P_{i,j}(1-R_{i,j})+\eta_{11}-1]\ln(1-\beta_{1}) \\
+    &+&[\sum_{(i,j)\in s_2}(1-\theta_{i,j})R_{i,j} + \sum_{(i,j)\in s_1}(1-P_{i,j})R_{i,j} \\ 
+    &+&\eta_{00}-1]\ln{\beta_0} +[\sum_{(i,j)\in s_2}(1-\theta_{i,j})(1-R_{i,j}) \\ 
+    &+& \sum_{(i,j)\in s_1}(1-P_{i,j})(1-R_{i,j}) \\
+    &+&\eta_{01}-1]\ln(1-\beta_{0})
+\end{eqnarray*}
+Because $\beta$ obeys the Beta distribution, we can get the parameters: 
+\begin{eqnarray*}
+\rho_{0,0} &=& \eta_{0,0}\\
+\rho_{0,1} &=& \sum_{(i,j)\in s_2}(1-\theta_{i,j})+\eta_{0,1}\\
+\rho_{1,0} &=& \left|s_1\right| +\eta_{1,0}\\
+\rho_{1,1} &=& \sum_{(i,j)\in s_2}\theta_{i,j}+\eta_{1,1}
+\end{eqnarray*}
+where $\left|s_1\right|$ is the number of elements is set $s_1$. Next, we derive $\ln(P_{i,j}|\theta_{i,j})$:
+\begin{eqnarray*}
+\ln q(P_{i,j}|\theta_{i,j}) &=& E_{q(Z,\beta)}[\ln p(R_{i,j},P_{i,j},Z,\beta)] \\
+&=& P_{i,j}*\ln[exp(R_{i,j}*\psi(\rho_{1,0}))\\
+&*&exp[(1-R_{i,j})*\psi(\rho_{1,1})]*exp(-\psi(\rho_{1,0}\\
+&+&\rho_{1,1}))*exp(X\mu_{z}Y)]+(1-P_{i,j}) \\
+&*&\ln[exp(R_{i,j}*\psi(\rho_{0,0}))*exp[(1-R_{i,j})\\
+&*&\psi(\rho_{0,1})]*exp(-\psi(\rho_{0,0}+\rho_{0,1}))]
+\end{eqnarray*}
+we define:
+\begin{eqnarray*}
+l_1 = exp(\psi(\rho_{1,1})-\psi(\rho_{1,0}+\rho_{1,1})+X_{i}\mu Y_{j}^{T})\\
+l_2 = exp(\psi(\rho_{0,1})-\psi(\rho_{0,0}+\rho_{0,1}))
+\end{eqnarray*}
+Then we get the estimated value of $\theta_{i,j}=\frac{l_1}{l_1+l_2}$.
+Finally, for variational parameters $\zeta$, we maximize Equ.~\ref{equ:variational}:
+\begin{equation}\label{equ:variational}
+    \ln{\sigma(\zeta_{i,j})}-\frac{\zeta_{i,j}}{2}-\lambda(\zeta_{i,j})[(X_{i}ZY_{j}^{T})^2-(\zeta_{i,j})^2]
+\end{equation}
+Deriving the Equ.~\ref{equ:variational} and making it equal to $0$. We get the update formula for the variation parameters $\zeta_{i,j} = \left|X_{i}\mu Y_{j}^T\right|$.
+
+As shown in Alg.~\ref{alg:model}, in each iteration of the inference we alternatively optimize the variational parameters for $q(Z|\mu,\upsilon),q(\beta|\rho), q(P|\theta)$ and the parameters for the lower bound $\sigma(\zeta)$.  In each iteration, we first obtain the optimal $\theta,\mu,v,\rho$ and then we update $\zeta$. The iteration is repeated until convergence is achieved.
+
+\begin{algorithm}
+    \SetKwInOut{Input}{input}
+    \SetKwInOut{Output}{output}
+    \Input{P, R, X, Y}
+    \Output{$\mu$, $\upsilon$, $\rho$, $\theta$, $\zeta$}
+    initialization\;
+    \Repeat{convergence}{
+        \For{$Z_{k,l} \in Z$}{
+            $\mu_{k,l} \leftarrow \frac{\sum_{(i,j)\in s_2}(\theta_{i,j}-\frac{1}{2})X_{i,k}*Y_{j,l}+\sum_{(i,j)\in s_1}\frac{1}{2}X_{i,k}*Y_{j,l}}{2*(\sum_{i,j}\lambda(\zeta_{i,j})X^{2}_{i,k}Y_{j,l}^{2}+\frac{1}{\sigma^2})}$\;
+            $\upsilon_{k,l} \leftarrow \frac{1}{\sqrt{2*(\sum_{i,j}\lambda(\zeta_{i,j})X^{2}_{i,k}Y_{j,l}^{2}+\frac{1}{\sigma^2})}}$\;
+        }
+        \For{$\beta$}{
+            $\rho_{0,0} \leftarrow \eta_{0,0}$\;
+            $\rho_{0,1} \leftarrow \sum_{(i,j)\in s_2}(1-\theta_{i,j})+\eta_{0,1}$\;
+            $\rho_{1,0} \leftarrow \left|s_1\right| +\eta_{1,0}$\;
+            $\rho_{1,1} \leftarrow \sum_{(i,j)\in s_2}\theta_{i,j}+\eta_{1,1}$\;
+        }
+        \For{$(i,j) \in s_2$}{
+            $l_1 = exp(\psi(\rho_{1,1})-\psi(\rho_{1,0}+\rho_{1,1})+X_{i}\mu Y_{j}^{T})$\;
+            $l_2 = exp(\psi(\rho_{0,1})-\psi(\rho_{0,0}+\rho_{0,1}))$\;
+            $\theta_{i,j} \leftarrow \frac{l_1}{l_1+l_2}$\;
+        }
+        \For{$(i,j) \in s_1+s_2$}{
+            $\zeta_{i,j} \leftarrow \left|X_{i}\mu Y_{j}^T\right|$\;
+        }
+    }
+    \caption{Inference for FNML}\label{alg:model}
+\end{algorithm}
+
+\subsection{Model Ensemble}
+As previously shown, FNML model has the advantage of debasing the labels by utilizing the non-randomly missingness of responses. However, due to the severe sparsity of available responses in DTI database, the prediction of FNML can still be of high variance and over-fit the training set. To tackle this problem, we propose FNML-EN, an ensemble algorithm which is specifically designed for FNML model.
+
+%+reference
+FNML-EN is inspired by the well-known boosting algorithm~\cite{Boosting}, and the SMOTE~\cite{SMOTE} oversampling technique which has been successfully applied in many imbalanced classification problems. Recall that in boosting, training instances are iteratively re-weighted on the basis of classification error. In FNML-EN, an iterative reweighing framework is also adopted. In the $t-$th round, we run FNML on the current training set to obtain the prediction of labels (i.e. $p_{i,j}=p(P_{i,j}=1|X,Y,Z)$) and prediction of responses (i.e. $r_{i,j}=p(R_{i,j}=1|P_{i,j},\beta,\eta)$). We then sort each training instance (i.e. drug-target pair $(i,j)$) in descending order of $p_{i,j}$ to get its rank (denoted as $rank_{i,j}$). Finally, we sample with replacement positive instances based on the $s_{i,j}$, which is defined as:
+\begin{equation}\label{equ:sample}
+    s(i,j) = \frac{ln(\frac{rank_{i,j}}{r_{i,j}})}{\sum_{i,j}{ln(\frac{rank_{i,j}}{r_{i,j}})}}
+\end{equation}
+
+As in SMOTE~\cite{SMOTE}, we will add the synthetic data point to the original set to form a new training set for the $t+1$ round. In the experiment, the number of sampled instances is equivalent to the number of positive labeled instances in the groundtruth. For example, if there are $n$ positive DTI pairs in the original dataset, then in each round we will have $2\times n$ positive DTI pairs in the training set. The iteration is terminated after $I$ rounds, and the final prediction is made by averaging the results of all FNML models. 
+
+Now let's take a closer look into the sampling weight Equ.~\ref{equ:sample}. The possibility of a positive training instance being sampled is increased if it is classified wrongly (i.e. smaller $p_{i,j}$ and henceforth with larger $rank_{i,j}$). We use the predicted response to further adapt to FNML at each round. We will validate the effect of $r_{i,j}$ in our sampling strategy in Sec.~\ref{sec:experiment}. 
+
+\section{Experiment}\label{sec:experiment}
+\subsection{Experimental Setup}
+
+
+\textbf{Datasets.} 
+We use the same datasets as in~\cite{Luo2017Network}: i.e. the drug-target interaction labels are obtained from the latest version of DrugBank (version 3.0)~\cite{Knox2011DrugBank}. This data set is referred to as the full data set. Only $0.18\%$ of the drug-target interactions are labelled as positive, none is labelled as negative. As in~\cite{Luo2017Network}, we also construct a sample dataset, where all the positive interactions are reserved and an equal number of unknown interactions are sampled to be negative. Statistics of the two data sets are shown in Tab.~\ref{tab:data}. 
+\begin{table}[htp]
+\caption{Statistics of the datasets}\label{tab:data}
+\center
+\vspace*{-10pt}
+\small
+\begin{tabular}{|p{0.8cm}|p{0.8cm}|p{0.9cm}|p{1cm}|p{1.2cm}|p{1.2cm}|}
+%
+%{|c|c|c|c|c|c|}
+\hline
+Data & \#Drugs & \#Targets & \#Positive & \#Negative & \#Unknown \\\hline
+Full & 708 & 1,512 & 1,923 & 0 & 1,068,573 \\\hline
+Sample & 708 & 1,512 & 1,923 & 1,923 & 1,066,650 \\\hline
+\end{tabular}
+\vspace*{-5pt}
+\end{table}%
+
+We use a variety of networks to extract features $X,Y$. The default feature vectors $X$ are extracted from drug structure similarity network (denoted as ds), where the similarity score between two drugs is calculated using the Tanimoto coefficient~\cite{Hattori2003Drug} according to their chemical structures; The default feature vectors $Y$ are extracted from protein sequence similarity network (denoted as ps), which is constructed by computing the Smith-Waterman score~\cite{Smith1981Protein} of their primary sequences. In order to evaluate model performance with different features, we also use three extra drug networks: drug-drug interaction network (dd)~\cite{Knox2011DrugBank}, the drug-disease network (di)~\cite{Davis2012DrugDisease}, the drug-side-effect network (de)~\cite{Kuhn2010DrugSideEffect} and two protein networks: the protein-disease association network (pd)~\cite{Davis2012DrugDisease}, the protein-protein interaction network (pp)~\cite{Keshava2009ProteinInteration}. 
+
+
+%\textbf{Preprocessing.} Include the networks we use
+
+\textbf{Evaluation.} Throughout the experiment section, the major evaluation metric is \textbf{A}rea \textbf{U}nder \textbf{P}recision \textbf{R}ecall curve (AUPR), which is commonly adopted in bioinformatic studies. An auxiliary evaluation metric is \textbf{A}rea \textbf{U}nder \textbf{ROC} curve (AUROC).
+
+\subsection{Results and Analysis}
+\textbf{FNML Performance.} We first evaluate the accuracy of DTI prediction of the proposed FNML model. The hyper-parameter settings are as follows. The number of dimensions for drug features are $K=300$, for target features $L=300$, hyper-parameters are $\sigma^2=1,\eta_{0}=1,\eta_{1}=1$. In this experiment, we use the default features $X,Y$. The code and data used in FNML are available at: https://github.com/517515435/FNML
+
+
+
+We compare our FNML model with 5 state-of-the-art methods: (1) DeepWalk~\cite{Zong2017Deep}: a similarity-based drug-target prediction method that enhances similarity computation by deep learning method within a linked tripartite network. (2) HNM~\cite{Wang2014Drug}: a network model in which strength between a disease-drug pair is calculated through an iterative algorithm on the heterogeneous graph that also incorporates drug-target information. (3) NetLapRLS~\cite{Xia2010Semi}: a manifold regularization semi-supervised learning method. (4) PUDTI~\cite{Peng2017Screening}: an SVM-based optimization model that is trained on negative samples extracted based on positive-unlabeled learning. (5) DTINet~\cite{Luo2017Network}: a regression model that learns feature space mapping $Z$ by the loss function  $\min_{Z} \sum_{i,j}(P_{i,j}-(XZY)_{i,j})^2$. We do not change the default settings for all the above comparative methods.
+
+We perform the evaluation on two datasets. The first one is on the full dataset, i.e. we randomly segment the whole data set to 10 divisions and conduct 10-fold cross-validation. The second one is on the sample dataset, i.e. keeping the ratio of positive and negative samples to $1:1$, we conduct random sampling for 10 times and the reported results are averaged over the 10 sets. 
+
+The comparative performance on the full dataset is shown in Fig.~\ref{fig:full}. We can see that (1) FNML model significantly boosts the AUPR performance by $49.32\%$, compared with the best of state-of-the-art methods. The best comparative method is DTINet, which achieves a $30.29\%$ AUPR. Our FNML model obtains a $45.23\%$ AUPR. As AUPR is well regarded to be a more robust and accurate evaluation metric than AUROC~\cite{Luo2017Network}, this observation demonstrates the potential of our model. (2) Most of the state-of-the-art methods yield very low AUPR results on the full dataset. This observation again reveals that obtaining a high AUPR performance is challenging on the full dataset. (3) In term of AUROC, the best result is obtained by NetLapRLS. However, the best comparative result is $91.78\%$, while FNML produces a comparable $91.12\%$ AUROC. 
+
+\begin{figure}[t]
+\centering
+\scalebox{0.8}{
+\subfigure[AUPR]{
+\includegraphics[width=5cm,height=3.5cm]{alldata_AUPR_dsps.eps}
+\label{fig:allaupr}
+}
+\subfigure[AUROC]{
+\includegraphics[width=5cm,height=3.5cm]{alldata_AUROC.eps}
+\label{fig:allauroc}
+}}
+%\vspace*{-10pt}
+\caption{On the full dataset, FNML significantly boosts AUPR while obtaining comparable AUROC.}\label{fig:full}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\scalebox{0.8}{
+\subfigure[AUPR]{
+\includegraphics[width=5cm,height=3.5cm]{11data_AUPRdsps.eps}
+\label{fig:allaupr}
+}
+\subfigure[AUROC]{
+\includegraphics[width=5cm,height=3.5cm]{11data_AUROC.eps}
+\label{fig:allauroc}
+}}
+%\vspace*{-10pt}
+\caption{On the sample dataset, FNML outperforms state-of-the-art methods in terms of both AUPR and AUROC.}\label{fig:sample}
+
+\end{figure}
+
+The comparative performance on the sample dataset is shown in Fig.~\ref{fig:sample}. We can see that (1) FNML model achieves a better AUPR than all state-of-the-art methods. The best comparative method is DTINet, which achieves $93.20\%$. Our FNML model obtains a $94.66\%$ AUPR. (2) Most of the state-of-the-art methods have a higher AUPR result on the sample dataset than the full dataset, due to the balanced ratio of positive and negative samples. (3) FNML model outperforms all state-of-the-art models in AUROC performance.  The best comparative method is again DTINet, which achieves $91.41\%$. Our FNML model obtains a $92.93\%$ AUROC. (4) Surprisingly, DeepWalk has a lowest AUPR performance on the sample set. A possible reason is that the network representation extracted by deepwalk is based on homogeneous network structure, and thus is not accurate. 
+%Moreover, we use the public open source codes provided by authors in~\cite{Zong2017Deep}, which are not specifically tuned for the DrugBank dataset.
+
+\textbf{FNML Performance with Different Features.} We next study how FNML model performs with different features. We use various combination of $X$ and $Y$ as inputs. That is, we extract X from the four networks on the drug side (i.e. dd,di,de,ds) respectively, extract Y from the three networks on the protein side (i.e. pp, pd, ps) respectively, and use the $12$ combinations as inputs to train the model. The predictions are tested on the full dataset.
+
+We compare the AUPR and AUROC performance of FNML and DTINet. As shown in Fig.~\ref{fig:stability}, FNML outperforms DTINet in most cases. FNML generates better AUPR results for $10$ feature combinations out of $12$. In term of AUROC, FNML is better for $7$ feature combinations. The result shows that the performance improvement is stable. Change of feature representations does not affect FNML's ability to learn a better feature mapping space.
+
+\begin{figure}[!ht]
+\centering
+\subfigure[AUPR]{
+\includegraphics[width=8cm]{stability_AUPRds300_300.eps}
+%\vspace*{-5pt}
+\label{fig:stabilityaupr}
+}
+
+\subfigure[AUROC]{
+\includegraphics[width=8cm]{stability_AUROC.eps}
+\label{fig:stabilityauroc}
+}
+%\vspace*{-10pt}
+\caption{FNML model consistently outperforms DTINet with different feature inputs.}\label{fig:stability}
+\end{figure}
+
+
+
+\textbf{Number of dimensions.}  We next study the effects of number of dimensions $K,L$. We first fix $L=300$ and tune from $K=100$ to $K=500$.We can see from Fig.~\ref{fig:k} that the best number of drug features is around $300$. Then, we fix $K=300$ and tune from $L=100$ to $L=500$. As shown in Fig.~\ref{fig:l}, the best number of target features is $300$. An appropriate number of drug features is important. When the number of drug features is too large or too small i.e. $K\ge400$ or $K\le200$, we observe a descent fall in both AUPR and AUROC. However, the model performance is less sensitive to the number of target features. For $L>300$, AUPR and AUROC remain the same.   
+
+\begin{figure}[!ht]
+\centering
+\subfigure[$K$ number of drug features]{
+\includegraphics[width=4cm]{parameter_experiment_drug_feature_dsps.eps}
+\label{fig:k}
+}
+\subfigure[$L$ number of protein features]{
+\includegraphics[width=4cm]{parameter_experiment_protein_feature_dsps.eps}
+\label{fig:l}
+}
+%\vspace*{-10pt}
+\caption{AUPR and AUROC performance of our model with different number of drug and protein features.}\label{fig:parameter}
+\end{figure}
+
+\textbf{Performance of Ensemble Model.} 
+We conduct experiment on full dataset to evaluate our proposed ensemble model. We use the same hyper-parameters settings and number of feature dimensions for drugs and proteins.
+
+For a detailed study, we compare the AUPR and AUROC performance of FNML and FNML-EN, with different feature combinations. The results are shown in Fig.~\ref{fig:stability-EN}. We can see that our ensemble model FNML-EN generates better results in terms of AUPR and AUROC for all input features. This result shows that our ensemble model FNML-EN can robustly enhance FNML.
+
+
+\begin{figure}[!ht]
+\centering
+\subfigure[AUPR]{
+\includegraphics[width=8cm]{FNML_EN_FNML_AUPR.eps}
+%\vspace*{-5pt}
+\label{fig:enstabilityaupr}
+}
+
+\subfigure[AUROC]{
+\includegraphics[width=8cm]{FNML_EN_FNML_AUROC.eps}
+\label{fig:enstabilityauroc}
+}
+%\vspace*{-10pt}
+\caption{FNML-EN consistently enhances FNML with different feature inputs.}\label{fig:stability-EN}
+\end{figure}
+
+\textbf{Performance of Sampling Strategy.} 
+Here we conduct an experiment to verify the effectiveness of our sampling strategy (Equ.~\ref{equ:sample}).  We compare the performances of our sampling strategy with the following two sampling strategies: (1) FNML-RS: randomly sample the same size sample from the positive sample, and then combine with the original positive sample to form a new positive sample.  (2) FNML-SR: sample positive instances according to $
+s_{1}(i,j) = \frac{ln(rank_{i,j})}{\sum_{i,j}{ln(rank_{i,j})}}$. 
+
+The results are shown in Fig.~\ref{fig:samplingstrategy}. We can see that: (1) The AUROC values of the three methods are not much different. (2) Our sampling strategy outperforms FNML-RS and FNML-SR in terms of AUPR. Our FNML-EN gets a 50.92\% AUPR and FNML-SR gets a 49.06\% AUPR, which validate our assumption that response probability $r_{i,j}$ plays a key role in the sampling procedure.
+
+\begin{figure}[t]
+\centering
+\scalebox{0.8}{
+\subfigure[AUPR]{
+\includegraphics[width=5cm,height=3.5cm]{FNML_EN_Strategy_AUPR.eps}
+\label{fig:allaupr}
+}
+\subfigure[AUROC]{
+\includegraphics[width=5cm,height=3.5cm]{FNML_EN_Strategy_AUROC.eps}
+\label{fig:allauroc}
+}}
+%\vspace*{-10pt}
+\caption{Our sampling strategy outperforms other strategys.}\label{fig:samplingstrategy}
+\end{figure}
+
+\textbf{Comparable Performance of Ensemble model.} 
+Finally, we compare our ensemble model with other ensemble models. The comparative methods are as follows. (1) Bagging~\cite{Bagging}. We sample the training set with replacement to generate $I$ new training sets, and use these $I$ new training sets to train $I$ FNML models. After that, we average the output of $I$ FNML models to get final result. (2) Bagging With Over Simpling (BaggingOS). For a fair comparison, we also over-sample the positive instances in the training sets, and then perform bagging to output an aggregated prediction. (3) Boosting. Consider our model as a classifier and use the standard boosting framework to get the boosting ensemble of FNML model.  We tune the number of weak learners (i.e. the number of iterations $I$ in FNML-EN) from $2$ to $6$. 
+
+The comparative performance on full dataset is shown in Fig.~\ref{fig:ensemblecompare}. We can see that (1) FNML-EN achieves best AUPR and AUROC results, compared with bagging and boosting method with different numbers of weak learners $I$. This indicates that the proposed ensemble method is robust and superior than conventional ensemble learning methods. (2) The result of Bagging is relatively poor, because the dataset is highly imbalanced. The positive samples are not fully utilized due to the sampling procedure. (3) The result of BaggingOS is better than Bagging, because over-sampling the positive instances generates accurate predictions to fully utilize information in the training data. (4) The result of boosting is not good, indicating that treating positive and negative samples equally is not applicable to highly imbalanced data. (5) In terms of AUROC, the performance of an ensemble learner increases as the number of weak learners $I$ increases. However, the performance of AUPR does not differ much. When $I=4$, our model get highest AUPR (50.92\%).
+
+\begin{figure}[t]
+\centering
+\scalebox{0.8}{
+\subfigure[AUPR]{
+\includegraphics[width=5cm,height=3.5cm]{Ensemble_TraditionalEnsembleLineAUPR.eps}
+\label{fig:allaupr}
+}
+\subfigure[AUROC]{
+\includegraphics[width=5cm,height=3.5cm]{Ensemble_TraditionalEnsembleLineAUROC.eps}
+\label{fig:allauroc}
+}}
+%\vspace*{-10pt}
+\caption{Our ensemble model outperforms traditional ensemble models.}\label{fig:ensemblecompare}
+\end{figure}
+\section{Conclusion}\label{sec:conclusion}
+
+We propose a novel DTI prediction model based on the assumption that unknown DTI labels are missing not at random. By associating the status of a DTI being labelled or unknown to the sign of the DTI label, our proposed FNML model can learn a better feature mapping from drug feature space to target feature space. We experimentally demonstrate that FNML outperforms state-of-the-art computational DTI identification methods. This work sheds some insights into fully exploiting the information in unknown DTIs. We further enhance the DTI prediction performance by an ensemble scheme. The ensemble scheme leverages the predictions of labels and responses by FNML in a framework which integrates over-sampling and boosting. We experimentally validate the importance of including predictions of responses in oversampling. Our future directions include improving the factorization framework and analyzing the missing mechanisms. 
+
+
+
+
+
+
+
+
+
+%\section*{Acknowledgment}
+
+
+%The authors would like to thank...
+
+
+% Can use something like this to put references on a page
+% by themselves when using endfloat and the captionsoff option.
+\ifCLASSOPTIONcaptionsoff
+  \newpage
+\fi
+
+
+
+% trigger a \newpage just before the given reference
+% number - used to balance the columns on the last page
+% adjust value as needed - may need to be readjusted if
+% the document is modified later
+%\IEEEtriggeratref{8}
+% The "triggered" command can be changed if desired:
+%\IEEEtriggercmd{\enlargethispage{-5in}}
+
+% references section
+
+% can use a bibliography generated by BibTeX as a .bbl file
+% BibTeX documentation can be easily obtained at:
+% http://mirror.ctan.org/biblio/bibtex/contrib/doc/
+% The IEEEtran BibTeX style support page is at:
+% http://www.michaelshell.org/tex/ieeetran/bibtex/
+%\bibliographystyle{IEEEtran}
+% argument is your BibTeX string definitions and bibliography database(s)
+%\bibliography{IEEEabrv,../bib/paper}
+%
+% <OR> manually copy in the resultant .bbl file
+% set second argument of \begin to the number of references
+% (used to reserve space for the reference number labels box)
+\begin{thebibliography}{10}
+
+\bibitem{Keiser2007ligand}
+Keiser, M. J. et al. Relating protein pharmacology by ligand chemistry. Nature biotechnology 25, 197–206 (2007).
+
+\bibitem{Cheng2007docking}
+Cheng, A. C. et al. Structure-based maximal a nity model predicts small-molecule druggability. Nat. Biotechnol. 25, 71–75 (2007).
+\bibitem{Chen2016docking}
+Chen, X. et al. Drug-target interaction prediction: databases, web servers and computational models. Brief. Bioinform. 17, 696–712 (2016).
+
+\bibitem{Ding2013Similarity}
+Ding, H., Takigawa, I., Mamitsuka, H., and Zhu, S.
+\newblock Similarity-based machine learning methods for predicting drug-target interactions: a brief review. \newblock In {\em Briefings in bioinformatics}, 15(5), 734-747.
+
+
+\bibitem{Luo2017Network}
+Luo Y, Zhao X, Zhou J, et al.
+\newblock A network integration approach for drug-target interaction prediction and computational drug repositioning from heterogeneous information.
+\newblock In {\em Nature Communications}, 2017, 8(1).
+
+
+\bibitem{Peng2017Screening}
+Peng L, Zhu W, Liao B, et al.
+\newblock Screening drug-target interactions with positive-unlabeled learning.
+\newblock In {\em Scientific Reports}, 2017, 7(1): 8087.
+
+\bibitem{Wang2014Drug}
+Wang W, Yang S, Zhang X, et al. 
+\newblock Drug repositioning by integrating target information through a heterogeneous network model. 
+\newblock In {\em Bioinformatics}, 2014, 30(20):2923-2930.
+
+
+
+\bibitem{Boosting}
+Schapire R E. 
+\newblock The Boosting Approach to Machine Learning: An Overview
+\newblock In {\em Nonlinear Estimation and Classification}. Springer New York, 2003:149-171.
+
+\bibitem{Little1987Statistical}
+R. J. A. Little and D. B. Rubin.
+\newblock Statistical Analysis with Missing Data, 1987.
+
+\bibitem{Cho2015DCA}
+Cho H, Berger B, Peng J. 
+\newblock Diffusion Component Analysis: Unraveling Functional Topology in Biological Networks
+\newblock In {\em Research in Computational Molecular Biology}. Springer International Publishing, 2015:62-64.
+
+
+\bibitem{Variational}
+Bishop C M. 
+\newblock Pattern Recognition and Machine Learning. 
+\newblock In {\em Information Science and Statistics}. Springer-Verlag New York, Inc. 2006.
+
+\bibitem{SMOTE}
+Chawla N V, Bowyer K W, Hall L O, et al. \newblock SMOTE: synthetic minority over-sampling technique[J].
+\newblock In {\em Journal of Artificial Intelligence Research}, 2002, 16(1):321-357.
+
+\bibitem{Knox2011DrugBank}
+Knox C, Law V, Jewison T, et al. 
+\newblock DrugBank 3.0: a comprehensive resource for ‘Omics’ research on drugs. 
+\newblock In {\em Nucleic Acids Research}, 2011, 39(Database issue):D1035.
+
+\bibitem{Hattori2003Drug}
+Hattori, M., Okuno, Y., Goto, S.  Kanehisa, M.
+\newblock Development of a chemical structure comparison method for integrated analysis of chemical and genomic information in the metabolic pathways. 
+\newblock In {\em Journal of the American Chemical Society} 125, 11853–11865 (2003).
+
+
+\bibitem{Smith1981Protein}
+Smith, T. F. and Waterman, M. S. 
+\newblock Identification of common molecular subsequences. 
+\newblock In {\em Journal of molecular biology} 147, 195–197 (1981).
+
+
+\bibitem{Davis2012DrugDisease}
+Davis, A. P., Murphy, C. G., Johnson, R., Lay, J. M., Lennon-Hopkins, K., Saraceni- Richards, C., Sciaky, D., King, B. L. Rosenstein, M. C., Wiegers, T. C., et al. 
+\newblock The comparative toxicogenomics database: update 2013.
+\newblock {\em  Nucleic acids research}, 41(D1), D1104–D1114.
+
+
+\bibitem{Kuhn2010DrugSideEffect}
+Kuhn, M., Campillos, M., Letunic, I., Jensen, L. J., and Bork, P.  
+\newblock A side effect resource to capture phenotypic effects of drugs. 
+\newblock {\em Molecular systems biology}, 6(1), 343.
+
+\bibitem{Keshava2009ProteinInteration}
+Keshava Prasad T S, Goel R, Kandasamy K, et al. 
+\newblock Human Protein Reference Database--2009 update.
+\newblock {\em Nucleic Acids Research}, 2009, 37(Database issue):767-72.
+
+
+\bibitem{Zong2017Deep}
+Zong N, Kim H, Ngo V, et al. 
+\newblock Deep Mining Heterogeneous Networks of Biomedical Linked Data to Predict Novel Drug-Target Associations. 
+\newblock In {\em Bioinformatics}, 2017, 33(15).
+
+
+
+
+\bibitem{Xia2010Semi}
+Xia Z, Wu L Y, Zhou X, et al. 
+\newblock Semi-supervised drug-protein interaction prediction from heterogeneous biological spaces. 
+\newblock In {\em Bmc Systems Biology}, 2010, 4(S2):1-16.
+
+
+\bibitem{Bagging}
+Breiman L. 
+\newblock Bagging predictors. 
+\newblock In {\em Machine Learning}, 1996, 24(2):123-140.
+
+\end{thebibliography}
+
+\end{document}
+
+
