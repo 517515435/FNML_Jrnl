@@ -511,23 +511,22 @@ However, due to the particularity of drug target data, it is difficult for tradi
 %Second, because there are few researchers who will study whether drugs and targets are not working, negative samples are missing from drug target data. The general classifier needs to provide negative samples for training, and the lack of negative samples will undoubtedly seriously affect the effect of the classifier. 
 Second, there is very little positive sample data in the data. For example, In the data used in this paper, the proportion of positive samples is less than 1\%. In such highly unbalanced data, most of the classifiers will fail. To address the imbalanced problem arised from the binary classification scheme, many research has attempted to extract a subset of reliable negative samples, e.g. by random sampling~\cite{Luo2017Network} or by \textbf{P}ositive \textbf{U}nlabel \textbf{L}earning (PU Learning)~\cite{Peng2017Screening}.
 
+Instead of labeling the unknown DTIs as negative, we argue that it is more natural to consider the unknown DTIs, i.e. DTIs that are neither identified in vivo to be positive nor experimentally validated to be negative (non-interacting drug-target pairs), as missing labels. Furthermore, our assumption in this work is that labels are not missing at random. This is an intuitive and reasonable assumption, because researchers will use their domain expertise to filter DTIs with a high possibility to be positive and prioritize validations for these DTIs in vivo. For example, researchers find the efficacy target of a drug based on principles of biochemistry, biophysics, genetics and chemical biology. If ample evidences exist to support positive interactions with the target, then the possibility of a positive DTI is high, and the researchers are likely to conduct in vivo experiments. On the contrary, drug target interactions that are less likely to be positive are more likely to be ignored by researchers and their labels are likely to be missing. In summary, our contributions are as follows:
+\begin{itemize}
+    \item Our first contribution in this work is a novel \textbf{F}actorization with \textbf{N}on-random \textbf{M}issing \textbf{L}abels model (FNML). To the best of our knowledge, this is the first time missing not at random theory is applied in DTI identification. The inputs of FNML are feature vectors of drugs and targets, the partially observed labels, and the fully observed responses (i.e. labels are given or missing). We allow the feature vectors to be learnt and/or integrated from heterogenous sources. The labels and responses are binary variables. The FNML model mimics the probabilistic procedures to generate labels from feature vectors and responses from labels. Specifically, the labels are related to feature vectors of both drugs and targets, and a hidden matrix mapping from the drug features to target features. The possibility of giving a response is associated with the sign of the label.
+    \item Our second contribution is FNML-EN, an ensemble learning strategy which is specifically designed for FNML. FNML-EN is efficient as it leverages the power of over-sampling in the iterative boosting framework~\cite{Boosting}. We use both predictions of label and response by the current FNML model to sample training instances to train the next FNML model.  FNML models based on different training sets are aggregated to provide the final prediction.
+    \item We conduct comprehensive experiments on the latest DTI database. Experimental results show that the FNML model outperforms state-of-the-art DTI prediction methods in terms of \textbf{A}rea \textbf{U}nder \textbf{R}eceiver \textbf{O}perating \textbf{C}haracteristic curve (AUROC) and \textbf{A}rea \textbf{U}nder \textbf{P}recision \textbf{R}ecall curve (AUPR), which are the most commonly adopted metrics to evaluate DTI prediction performance. FNML-EN further improves prediction accuracy. We also show that our models provide robust performance enhancement, despite of the input features.
+\end{itemize}
 
-Instead of labeling the unknown DTIs as negative, we argue that it is more natural to consider the unknown DTIs, i.e. DTIs that are neither identified in vivo to be positive nor experimentally validated to be negative (non-interacting drug-target pairs), as missing labels. Furthermore, our assumption in this work is that labels are not missing at random. This is an intuitive and reasonable assumption, because researchers will use their domain expertise to filter DTIs with a high possibility to be positive and prioritize validations for these DTIs in vivo. For example, researchers find the efficacy target of a drug based on principles of biochemistry, biophysics, genetics and chemical biology. If ample evidences exist to support positive interactions with the target, then the possibility of a positive DTI is high, and the researchers are likely to conduct in vivo experiments. On the contrary, drug target interactions that are less likely to be positive are more likely to be ignored by researchers and their labels are likely to be missing.
+\section{Related Work}
+Many traditional machine learning methods simply build the classifier through the chemical structure of the drug and the sequence of the protein. For example, Bleakley~\cite{Bleakley2009} built a support vector machine framework to predict drug-target interaction based on a bipartite local model. Xia~\cite{Xia2010Semi} represented a manifold regularization semi-supervised learning method, by combining known drug-protein interaction network information and their chemical structure data. Li~\cite{Li2010} construct a drug-target interactome network containing three subnetworks of protein–protein interaction, drug–target interaction and drug–drug relationship to capture the complex relationship between drugs and targets. Lu~\cite{Lu2017BMC} proposed and developed a new method for DTI prediction using similarity indices. The advantage of this method is that it only depends on the topology of the network, and does not need to know other information about the nodes and edges. Yan~\cite{Yan2016} proposed a new label propagation algorithm on network with mutual interaction information derived from heterogeneous networks to infer the label of drug-target interaction.
 
-\subsection{Related Work}
-Many traditional machine learning methods simply build the classifier through the chemical structure of the drug and the sequence of the protein. As people's research on drugs and diseases continues to deepen, other information can be combined in the process of predicting drug targets, such as drugs and side effects, drugs and diseases, targets and diseases. For instance, DTINet~\cite{Luo2017Network} combines drugs, diseases, side effects and other information to learn low-dimensional feature representations of drug and targets and then applies inductive matrix completion. HNM~\cite{Wang2014Drug} integrates information through drug, target and disease to construct a three-layer heterogeneous network. After that, the strength of each drug-target pair is calculated by an iterative algorithm. 
+As people's research on drugs and diseases continues to deepen, other information can be combined in the process of predicting drug targets, such as drugs and side effects, drugs and diseases, targets and diseases. Richer data makes it possible to conduct more in-depth research on drug target prediction. So many researchers have tried to study drug targets on heterogeneous data. For instance,  Fu~\cite{Fu2016BMC}  build a DTI prediction framework based on observed meta-path topological features of a semantic network across the chemical and biological space. Zheng~\cite{Zheng2013KDD} proposed a model named Multiple Similarities Collaborative Matrix Factorization (MSCMF), which matrix factorization is applied on drugs and targets space, which is further regularized by weighted similarity matrices over drugs and those over targets. The similarity matrices is calculated a weighted averaging scheme. 
+DTINet~\cite{Luo2017Network} combines drugs, diseases, side effects and other information to learn low-dimensional feature representations of drug and targets and then applies inductive matrix completion. HNM~\cite{Wang2014Drug} integrates information through drug, target and disease to construct a three-layer heterogeneous network. After that, the strength of each drug-target pair is calculated by an iterative algorithm. Zong~\cite{Zong2017Deep} propose a similarity-based drug–target prediction method by apply a deep learning method called DeepWalk to calcuted the similarity within linked Tripartite network.
 
-One component of our work (i.e labels are generated by feature vectors learnt and fused from heterogenous information networks) is inspired by a recent work DTINet~\cite{Luo2017Network}. However, there are three key differences between our work and DTINet. (1) DTINet is based on deterministic matrix factorization, our work is based on probabilistic factor models. For example, the hidden feature space mapping matrix, labels, and responses are all random variables. This setting enables the FNML model to regulate the parameters (i.e. hidden feature space mapping matrix) by introducing appropriate priors. Therefore, performance on sparse dataset is improved. (2) DTINet is based on randomly missing responses, i.e. it samples uniformly a set of unknown DTIs as negative sample, while FNML is based on missing not at random theories. Statistical theory in~\cite{Little1987Statistical} shows that applying a model based on missing at random assumptions can lead to biased parameter estimation on data sets with missing not at random entries. (3) DTINet adopts only a subset of unknown DTIs to preserve a balanced number of positive and negative samples, while our model uses all information in the data set.
+One component of our work (i.e labels are generated by feature vectors learnt and fused from heterogenous information networks) is inspired by  DTINet~\cite{Luo2017Network}. However, there are three key differences between our work and DTINet. (1) DTINet is based on deterministic matrix factorization, our work is based on probabilistic factor models. For example, the hidden feature space mapping matrix, labels, and responses are all random variables. This setting enables the FNML model to regulate the parameters (i.e. hidden feature space mapping matrix) by introducing appropriate priors. Therefore, performance on sparse dataset is improved. (2) DTINet is based on randomly missing responses, i.e. it samples uniformly a set of unknown DTIs as negative sample, while FNML is based on missing not at random theories. Statistical theory in~\cite{Little1987Statistical} shows that applying a model based on missing at random assumptions can lead to biased parameter estimation on data sets with missing not at random entries. (3) DTINet adopts only a subset of unknown DTIs to preserve a balanced number of positive and negative samples, while our model uses all information in the data set.
 
 We also want to distinguish our work with another line of research. Usually only positive DTIs are deposited in known databases. Due to the lack of negative samples, PU learning has been employed in DTI identification, e.g. to facilitate negative sample extraction~\cite{Peng2017Screening}. PU learning does not explicitly associate the status of an instance (i.e. being labeled or unlabeled) with the value of its label. We also want to mention here that, although we experiment with datasets where only positive DTIs are deposited, FNML is extendable without difficulty to databases where positive and negative DTIs are available. Thus our model is applicable in more scenarios.
-
-\subsection{Contribution}
-
-Our first contribution in this work is a novel \textbf{F}actorization with \textbf{N}on-random \textbf{M}issing \textbf{L}abels model (FNML). To the best of our knowledge, this is the first time missing not at random theory is applied in DTI identification. The inputs of FNML are feature vectors of drugs and targets, the partially observed labels, and the fully observed responses (i.e. labels are given or missing). We allow the feature vectors to be learnt and/or integrated from heterogenous sources. The labels and responses are binary variables. The FNML model mimics the probabilistic procedures to generate labels from feature vectors and responses from labels. Specifically, the labels are related to feature vectors of both drugs and targets, and a hidden matrix mapping from the drug features to target features. The possibility of giving a response is associated with the sign of the label.
-
-Our second contribution is FNML-EN, an ensemble learning strategy which is specifically designed for FNML. FNML-EN is efficient as it leverages the power of over-sampling in the iterative boosting framework~\cite{Boosting}. We use both predictions of label and response by the current FNML model to sample training instances to train the next FNML model.  FNML models based on different training sets are aggregated to provide the final prediction.
-
-We conduct comprehensive experiments on the latest DTI database. Experimental results show that the FNML model outperforms state-of-the-art DTI prediction methods in terms of \textbf{A}rea \textbf{U}nder \textbf{R}eceiver \textbf{O}perating \textbf{C}haracteristic curve (AUROC) and \textbf{A}rea \textbf{U}nder \textbf{P}recision \textbf{R}ecall curve (AUPR), which are the most commonly adopted metrics to evaluate DTI prediction performance. FNML-EN further improves prediction accuracy. We also show that our models provide robust performance enhancement, despite of the input features.
 
 \section{The Proposed Method}\label{sec:method}
 We start with the problem definitions and notations in Sec.~\ref{sec:input}. We then describe the proposed model FNML in Sec.~\ref{sec:model}. Finally we present the inference algorithm in Sec.~\ref{sec:inference}.
@@ -762,7 +761,7 @@ We use a variety of networks to extract features $X,Y$. The default feature vect
 \textbf{Evaluation.} Throughout the experiment section, the major evaluation metric is \textbf{A}rea \textbf{U}nder \textbf{P}recision \textbf{R}ecall curve (AUPR), which is commonly adopted in bioinformatic studies. An auxiliary evaluation metric is \textbf{A}rea \textbf{U}nder \textbf{ROC} curve (AUROC).
 
 \subsection{Results and Analysis}
-\textbf{FNML Performance.} We first evaluate the accuracy of DTI prediction of the proposed FNML model. The hyper-parameter settings are as follows. The number of dimensions for drug features are $K=300$, for target features $L=300$, hyper-parameters are $\sigma^2=1,\eta_{0}=1,\eta_{1}=1$. In this experiment, we use the default features $X,Y$. The code and data used in FNML are available at: https://github.com/517515435/FNML
+\textbf{FNML Performance.} We first evaluate the accuracy of DTI prediction of the proposed FNML model. The hyper-parameter settings are as follows. The number of dimensions for drug features are $K=300$, for target features $L=300$, hyper-parameters are $\sigma^2=1,\eta_{0}=1,\eta_{1}=1$. In this experiment, we use the default features $X,Y$. The code and data used in FNML are available at: https://github.com/XMUDM/FNML
 
 
 
@@ -872,6 +871,8 @@ s_{1}(i,j) = \frac{ln(rank_{i,j})}{\sum_{i,j}{ln(rank_{i,j})}}$.
 
 The results are shown in Fig.~\ref{fig:samplingstrategy}. We can see that: (1) The AUROC values of the three methods are not much different. (2) Our sampling strategy outperforms FNML-RS and FNML-SR in terms of AUPR. Our FNML-EN gets a 50.92\% AUPR and FNML-SR gets a 49.06\% AUPR, which validate our assumption that response probability $r_{i,j}$ plays a key role in the sampling procedure.
 
+
+
 \begin{figure}[t]
 \centering
 \scalebox{0.8}{
@@ -969,16 +970,65 @@ Ding, H., Takigawa, I., Mamitsuka, H., and Zhu, S.
 \newblock Similarity-based machine learning methods for predicting drug-target interactions: a brief review. \newblock In {\em Briefings in bioinformatics}, 15(5), 734-747.
 
 
+
 \bibitem{Luo2017Network}
 Luo Y, Zhao X, Zhou J, et al.
 \newblock A network integration approach for drug-target interaction prediction and computational drug repositioning from heterogeneous information.
 \newblock In {\em Nature Communications}, 2017, 8(1).
 
 
+
 \bibitem{Peng2017Screening}
 Peng L, Zhu W, Liao B, et al.
 \newblock Screening drug-target interactions with positive-unlabeled learning.
 \newblock In {\em Scientific Reports}, 2017, 7(1): 8087.
+
+
+\bibitem{Boosting}
+Schapire R E. 
+\newblock The Boosting Approach to Machine Learning: An Overview
+\newblock In {\em Nonlinear Estimation and Classification}. Springer New York, 2003:149-171.
+
+
+
+\bibitem{Bleakley2009}
+Bleakley, K. & Yamanishi, Y. 
+\newblock Supervised prediction of drug–target interactions using bipartite local models. 
+\newblock In {\em Bioinformatics} 25, 2397–2403 (2009).
+
+
+\bibitem{Xia2010Semi}
+Xia Z, Wu L Y, Zhou X, et al. 
+\newblock Semi-supervised drug-protein interaction prediction from heterogeneous biological spaces. 
+\newblock In {\em Bmc Systems Biology}, 2010, 4(S2):1-16.
+
+
+
+\bibitem{Li2010}
+Li Z C , Huang M H , Zhong W Q , et al. 
+\newblock Identification of drug-target interaction from interactome network with “guilt-by-association” principle and topology features[J]. 
+\newblock In {\em Bioinformatics}, 2015:btv695.
+
+
+\bibitem{Lu2017BMC}
+Lu Y , Guo Y , Korhonen A . 
+\newblock Link prediction in drug-target interactions network using similarity indices[J]. 
+\newblock In {\em BMC Bioinformatics}, 2017, 18(1):39.
+
+\bibitem{Yan2016}
+Yan X Y , Zhang S W , Zhang S Y . 
+\newblock Prediction of drug–target interaction by label propagation with mutual interaction information derived from heterogeneous network[J]. 
+\newblock In {\em Molecular BioSystems}, 2016, 12.
+
+
+\bibitem{Fu2016BMC}
+Fu G , Ding Y , Seal A , et al. 
+\newblock Predicting drug target interactions using meta-path-based semantic network analysis[J]. 
+\newblock In {\em BMC Bioinformatics}, 2016, 17(1):160.
+
+\bibitem{Zheng2013KDD}
+Zheng X , Ding H , Mamitsuka H , et al. [ACM Press the 19th ACM SIGKDD international conference - Chicago, Illinois, USA (2013.08.11-2013.08.14)] Proceedings of the 19th ACM SIGKDD international conference on Knowledge discovery and data mining - KDD \"13 - Collaborative matrix factorization with multiple similarities for predicting drug-target interactions[C]// Acm Sigkdd International Conference on Knowledge Discovery & Data Mining. ACM, 2013:1025.
+
 
 \bibitem{Wang2014Drug}
 Wang W, Yang S, Zhang X, et al. 
@@ -987,10 +1037,12 @@ Wang W, Yang S, Zhang X, et al.
 
 
 
-\bibitem{Boosting}
-Schapire R E. 
-\newblock The Boosting Approach to Machine Learning: An Overview
-\newblock In {\em Nonlinear Estimation and Classification}. Springer New York, 2003:149-171.
+\bibitem{Zong2017Deep}
+Zong N, Kim H, Ngo V, et al. 
+\newblock Deep Mining Heterogeneous Networks of Biomedical Linked Data to Predict Novel Drug-Target Associations. 
+\newblock In {\em Bioinformatics}, 2017, 33(15).
+
+
 
 \bibitem{Little1987Statistical}
 R. J. A. Little and D. B. Rubin.
@@ -1000,6 +1052,7 @@ R. J. A. Little and D. B. Rubin.
 Cho H, Berger B, Peng J. 
 \newblock Diffusion Component Analysis: Unraveling Functional Topology in Biological Networks
 \newblock In {\em Research in Computational Molecular Biology}. Springer International Publishing, 2015:62-64.
+
 
 
 \bibitem{Variational}
@@ -1043,20 +1096,6 @@ Kuhn, M., Campillos, M., Letunic, I., Jensen, L. J., and Bork, P.
 Keshava Prasad T S, Goel R, Kandasamy K, et al. 
 \newblock Human Protein Reference Database--2009 update.
 \newblock {\em Nucleic Acids Research}, 2009, 37(Database issue):767-72.
-
-
-\bibitem{Zong2017Deep}
-Zong N, Kim H, Ngo V, et al. 
-\newblock Deep Mining Heterogeneous Networks of Biomedical Linked Data to Predict Novel Drug-Target Associations. 
-\newblock In {\em Bioinformatics}, 2017, 33(15).
-
-
-
-
-\bibitem{Xia2010Semi}
-Xia Z, Wu L Y, Zhou X, et al. 
-\newblock Semi-supervised drug-protein interaction prediction from heterogeneous biological spaces. 
-\newblock In {\em Bmc Systems Biology}, 2010, 4(S2):1-16.
 
 
 \bibitem{Bagging}
